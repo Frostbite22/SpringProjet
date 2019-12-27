@@ -85,3 +85,7 @@
 {
 	margin-top: 20px ; 
 }
+
+.dropdown-item:hover {
+	color : black!important ; 
+}
