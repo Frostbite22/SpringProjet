@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://w3.org/1999/xhtml">
+  <head th:fragment="common-header">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <title>Ecommerce </title>
+
+    <!-- Bootstrap core CSS -->
+<link href="/css/bootstrap.min.css" rel="stylesheet"/>
+   
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet"/>
+  </head>
+  <body>
+  	<div th:fragment="navbar">
+	 <nav class="site-header sticky-top py-1">
+	  <div class="container d-flex flex-column flex-md-row justify-content-between">
+	    
+	    <li class="navbar-nav dropdown light">
+	        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+	          Products
+	        </a>
+	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+	          <a class="dropdown-item" href="#">Products</a>
+	          <div class="dropdown-divider"></div>
+	          <a class="dropdown-item" href="#">Localtion and Time</a>
+	          <a class="dropdown-item" href="#">F.A.Q</a>
+	        </div>
+	      </li>
+	    
+	        <form class="form-inline my-2 my-lg-0">
+	      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+	      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+	    </form>
+	    
+	    <a class="py-2 d-none d-md-inline-block" href="#">Shopping Cart</a>
+	    <a class="py-2 d-none d-md-inline-block" href="#">My account</a>
+	    <a class="py-2 d-none d-md-inline-block" href="#">Logout</a>
+	  </div>
+	</nav>
+   </div>
+   
+   
+  </body>
+</html>
