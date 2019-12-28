@@ -14,13 +14,13 @@
 			<div class="col-md-9 offset-md-3">
 			<!--  nav tabs -->
 				<ul class="nav nav-tabs">
-					<li class="nav-item "><a class="nav-link " data-toggle="tab" href="#tab-1">Create New Account</a></li>
-					<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tab-2">Log In</a></li>
-					<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tab-3">Forget Password</a></li>
+					<li class="nav-item "><a class="nav-link " data-toggle="tab" href="#tab-1" th:classappend="${classActiveNewAccount}? 'active '">Create New Account</a></li>
+					<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tab-2" th:classappend="${classActiveLogin}? 'active' ">Log In</a></li>
+					<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#tab-3" th:classappend="${classActiveForgetPassword}? 'active'">Forget Password</a></li>
 				</ul>
 			<!-- Tab Panels -->
 				<div class="tab-content">
-					<div class="tab-pane fade" id ="tab-1">			
+					<div class="tab-pane fade" id ="tab-1" th:classappend="${classActiveNewAccount}? 'in active show'">			
 						<div class="panel-group">
 							<div class="panel panel-default " style="border:none;">
 								<div class="panel-body rounded" style="background-color:#152238;margin-top:20px;padding-bottom:5px;">
@@ -42,7 +42,7 @@
 											<input required="required" type="text" class="form-control" id="email" name="email"/>
 											</div>
 											</div>
-											<p style="color:#fff;">Enter your Email</p>
+											<p style="color:#fff;">Enter New Email</p>
 										</div>
 										
 										<button type="submit" class="btn btn-primary">Create account</button>
@@ -52,7 +52,7 @@
 						</div>					
 					</div>
 					<!-- tab log in -->
-					<div class="tab-pane fade" id ="tab-2">
+					<div class="tab-pane fade " id ="tab-2" th:classappend="${classActiveLogin}? 'in active show'">
 						<div class="panel-group">
 							<div class="panel panel-default" style="border:none;">
 								<div class="panel-body rounded" style="background-color:#152238;margin-top:20px;padding-bottom:5px;">
@@ -84,7 +84,7 @@
 						</div>
 					</div>
 					<!--  tab forget password -->
-					<div class="tab-pane fade" id ="tab-3">
+					<div class="tab-pane fade" id ="tab-3" th:classappend="${classActiveForgetPassword}? 'in active show'">
 						<div class="panel-group">
 							<div class="panel panel-default" style="border:none;">
 								<div class="panel-body rounded" style="background-color:#152238;margin-top:20px;padding-bottom:5px;">
