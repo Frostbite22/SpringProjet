@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
   <head th:fragment="common-header">
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -35,8 +35,9 @@
 	    </form>
 	    
 	    <a class="py-2 d-none d-md-inline-block" href="#">Shopping Cart</a>
-	    <a class="py-2 d-none d-md-inline-block" th:href="@{/login}">My account</a>
-	    <a class="py-2 d-none d-md-inline-block" href="#">Logout</a>
+	    <a class="py-2 d-none d-md-inline-block" sec:authorize ="isAnonymous()" th:href="@{/login}">My account</a>
+	    <a class="py-2 d-none d-md-inline-block" sec:authorize="isAuthenticated()" th:href="@{/myProfile}">My account</a>
+	    <a class="py-2 d-none d-md-inline-block" sec:authorize="isAuthenticated()" th:href="@{/logout}">Logout</a>
 	  </div>
 	</nav>
    </div>
