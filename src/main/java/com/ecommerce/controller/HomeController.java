@@ -1,11 +1,15 @@
 package com.ecommerce.controller;
 
+import java.security.Principal;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -14,6 +18,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,16 +26,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ecommerce.entities.Product;
 import com.ecommerce.entities.User;
 import com.ecommerce.entities.security.PasswordResetToken;
 import com.ecommerce.entities.security.Role;
 import com.ecommerce.entities.security.UserRole;
+import com.ecommerce.service.ProductService;
 import com.ecommerce.service.UserService;
 import com.ecommerce.service.impl.UserSecurityService;
 import com.ecommerce.utility.MailConstructor;
 import com.ecommerce.utility.SecurityUtility;
 
 @Controller
+
+
 public class HomeController {
 	@Autowired
 	private JavaMailSender mailSender;
@@ -38,9 +47,14 @@ public class HomeController {
 	@Autowired
 	private MailConstructor mailConstructor;
 
+	@Autowired 
+	private ProductService productService ; 
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private UserDetailsService userDetailsService;
 	
 	@Autowired
 	private UserSecurityService userSecurityService;
@@ -61,6 +75,41 @@ public class HomeController {
 	{
 		model.addAttribute("classActiveLogin",true); 
 		return "myAccount" ; 
+	}
+	
+	@RequestMapping("/allProducts")
+	public String allProducts(Model model,Principal principal)
+	{	
+		if(principal != null) {
+			String username = principal.getName();
+			User user = userService.findByUsername(username);
+			model.addAttribute("user", user);
+		}
+		
+		List<Product> productList = productService.findAll() ; 
+		model.addAttribute("productList",productList); 
+		return "allProducts" ; 
+	}
+
+	@RequestMapping("/productDetail")
+	public String productDetails(Model model,Principal principal,
+			@PathParam("id") Long id)
+	{	
+	   
+		if(principal != null) {
+			String username = principal.getName();
+			User user = userService.findByUsername(username);
+			model.addAttribute("user", user);
+		}
+		
+			
+		Product product = productService.findById(id).orElse(null); 
+		model.addAttribute("product",product); 
+		
+		List<Integer> qtyList = Arrays.asList(1,2,3,4,5,6,7,8,9,10);
+		model.addAttribute("qtyList",qtyList);
+		model.addAttribute("qty",1);
+		return "productDetail" ; 
 	}
 	
 	@RequestMapping("/forgetPassword")
@@ -177,9 +226,9 @@ public class HomeController {
 		
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
-		model.addAttribute("classActiveEdit",true); 
-
 		model.addAttribute("user", user);
+
+		model.addAttribute("classActiveEdit", true);
 		
 		return "myProfile";
 	}

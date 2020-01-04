@@ -36,6 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			"/newUser",
 			"/forgetPassword",
 			"/login",
+			"/allProducts",
+			"/productDetail",
 			"/font/**"
 	};
 	
@@ -58,9 +60,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.rememberMe();
 	}
 	
+	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userSecurityService).passwordEncoder(passwordEncoder());
+	
 	}
 	
 }

@@ -1,0 +1,52 @@
+
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+  <head th:replace ="common/header :: common-header" />
+
+ <body>
+ 	<div th:replace="common/header :: navbar"/>
+   
+	<div class ="container box">
+		<div class="row">
+			<img class="d-inline w-100 img-responsive" src="http://www.somethingatemyalien.com/uploads/Game-SAMA-Something-Ate-My-Alien-Rokabium-Backstory-700x150.png" alt="Cyberpunk">
+		</div>
+		<h3  sec:authorize="isAuthenticated()" th:text="${user.username}"></h3>
+	
+		<div class="row" style="margin-top : 60px ;">
+			<div class="col-md-9 offset-md-3">
+				<div th:if="${emptyList}">
+					<h5>There is no products.</h5>
+				</div>
+				<table border="0" id="productList">
+					<thead><tr><th></th></tr></thead>
+					<tbody>
+						<tr data-th-each="product : ${productList}">
+						<td>
+							<div th:if="${product !=null}">
+								<div class="row">
+									<div class="col-md-3">
+										<a th:href="@{/productDetail?id=}+${product.id}"><img class ="img-responsive d-inline w-100" th:src="@{http://localhost:8091/admin}+@{/img/product/}+${product.id}+'.png'"></a>
+								
+									</div>
+									<div class="col-md-9">
+										<h4 th:text="${product.name}"></h4>
+										<strong>brand: </strong><span th:text="${product.brand}"></span><br>
+										<strong>price: </strong><span th:text="${product.price}"></span><br>
+										<strong>category: </strong><span th:text="${product.category}"></span><br>
+									</div>	
+								</div><hr>
+							</div>
+						</td>
+					</tbody>
+				</table>
+			</div>
+</div>	
+<!--  
+Footer part
+-->
+<div th:replace="common/footer :: footer-panel" />
+
+<div th:replace="common/footer :: body-bottom-scripts"/>
+
+</body>
+</html>

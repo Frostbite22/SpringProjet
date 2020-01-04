@@ -1,0 +1,64 @@
+
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1000/xhtml">
+  <head th:replace ="common/header :: common-header" />
+
+ <body>
+ 	<div th:replace="common/header :: navbar"/>
+   
+	<div class ="container box">
+		<div class="row">
+			<img class="d-inline w-100 img-responsive" src="http://www.somethingatemyalien.com/uploads/Game-SAMA-Something-Ate-My-Alien-Rokabium-Backstory-700x150.png" alt="Cyberpunk">
+		</div>
+		<h3  sec:authorize="isAuthenticated()" th:text="${user.username}"></h3>
+		<form th:action="@{/shoppingCart/addItem}" method="post">
+			<input hidden="hidden" th:field="*{product.id}"><!-- equals to name="id" th:value="${product.id}" -->	
+				<div class="row" style="margin-top : 60px ;">
+					<div class="col-md-3">
+						<a th:href="@{/allProducts}">Back to all products</a>
+						<img class ="img-responsive d-inline w-100" th:src="@{http://localhost:8091/admin}+@{/img/product/}+${product.id}+'.png'">
+					</div>
+					<div class="col-md-9">
+						<div class="row">
+							<div class="col-md-5">
+								<h4 th:text="${product.name}"></h4>
+								<strong>brand: </strong><span th:text="${product.brand}"></span><br>								
+								<strong>category: </strong><span th:text="${product.category}"></span><br>
+								<strong>Shipping Weight: </strong><span th:text="${product.shippingWeight}"></span> Kg						
+							</div>
+							<div class="col-md-7">
+								<div class="panel panel-default" style="border-width :5px ;margin-top:20px;">
+									<div class="panel-body">
+										<div class="row">
+											<div class="col-md-6">
+												<strong>price: </strong><span th:text="${product.price}"></span><br>
+												<span>Quantity:</span>
+												<select name="qty">
+													<option th:each="qty : ${qtyList}" th:value="${qty}" th:text="${qty}"></option>
+												</select>
+											</div>
+											<div class="col-md-6">
+												<h4 th:if ="*{product.inStockNumber&gt;10}" style="color: green;">In stock</h4>
+												<h4 th:if ="*{product.inStockNumber&lt;10 and product.inStockNumber&gt;0}" style="color: green;">Only <span th:text="${product.inStockNumber}"></span> left</h4>	
+												<h4 th:if ="*{product.inStockNumber == 0 }" style="color: red;">Unavailable</h4>	
+												<button type="submit" class="btn btn-primary">Add to Cart </button>
+											</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>	
+				</div>
+				<hr>
+					<p th:utext="${product.description}"></p>
+		</form>
+<!--  
+Footer part
+-->
+<div th:replace="common/footer :: footer-panel" />
+
+<div th:replace="common/footer :: body-bottom-scripts"/>
+
+</body>
+</html>

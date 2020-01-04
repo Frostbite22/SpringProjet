@@ -27,7 +27,7 @@
 									<div class="alert alert-info" th:if="${emailSent}">Check your email</div>
 									<form style="margin-left:20px;"th:action="@{/newUser}" method="POST">
 										<div class="form-group">
-											<label style="color:#fff;">Username : </label> &nbsp;<span style="color:red;" th:if="${usernameExists}">Username Already Exists</span>
+											<label style="color:#fff;" for="newUsername">Username : </label> &nbsp;<span style="color:red;" th:if="${usernameExists}">Username Already Exists</span>
 											<div class="row">
 											<div class="col-md-6 ">
 											<input required="required" type="text" class="form-control" id="newUsername" name="username"/>
@@ -59,8 +59,8 @@
 								<div class="panel-body rounded" style="background-color:#152238;margin-top:20px;padding-bottom:5px;">
 									<div th:if="${param.error != null}" style="color: red;"> Wrong Username or Password</div>
 									<form style="margin-left:20px;" th:action="@{/login}" method="POST">
-										<div class="form-group">
-											<label style="color:#fff;">Username</label>
+										<div class="form-group" >
+											<label style="color:#fff;" for="newUsername">Username</label>
 											<div class="row">
 											<div class="col-md-6 ">
 											<input required="required" type="text" class="form-control" id="newUsername" name="username"/>
